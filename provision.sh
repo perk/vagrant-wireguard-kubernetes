@@ -22,11 +22,21 @@ ufw allow out on cbr0
 ufw default allow routed
 
 microk8s.enable dashboard
+#microk8s.enable dns
+# microk8s.enable fluentd
+#microk8s.enable ingress
+# echo N | microk8s.enable istio
+# microk8s.enable jaeger
+# microk8s.enable metrics-server
+# microk8s.enable prometheus
 microk8s.enable registry
 microk8s.enable storage
 
+# microk8s.kubectl config view --raw > $HOME/.kube/config
 microk8s.kubectl config view --raw > /vagrant/.kube-config
 
+#snap alias microk8s.docker docker
+snap alias microk8s.istioctl istioctl
 snap alias microk8s.kubectl kubectl
 
 usermod -a -G microk8s vagrant
@@ -42,3 +52,9 @@ echo
 
 echo To connect to the VPN run on your local machine:
 echo $ ./vpn-up.sh
+
+# snap install docker
+# snap install knctl
+# snap install kubectl
+
+# kubectl port-forward -n kube-system --address 0.0.0.0 kubernetes-dashboard-678b7d865c-kx85q 8443:8443
